@@ -62,5 +62,6 @@ Following Installation Needed:
 ## Credits
 -DU-Virt-FSF-PT-02-2023-U-LOLC | NoSQL 28-Stu_Mini-Project  
 -AskBCS learning assistant  
+-DU Dashboard Module 18 "Getting Started" Guidelines  
 <a href="https://stackoverflow.com/questions/18022365/mongoose-validate-email-syntax">Stackoverflow Email Validation</a>  
 <a href="https://mongoosejs.com/docs/schematypes.html">Schema Types</a>
