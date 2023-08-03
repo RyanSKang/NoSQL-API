@@ -60,5 +60,5 @@ Following Installation Needed:
 <a href=""> Walkthrough Video Link </a>
 
 ## Credits
--DU-Virt-FSF-PT-02-2023-U-LOLC | ORM Stu-Mini-Project  
+-DU-Virt-FSF-PT-02-2023-U-LOLC | NoSQL 28-Stu_Mini-Project  
 -AskBCS learning assistant 
