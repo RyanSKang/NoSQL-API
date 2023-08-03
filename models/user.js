@@ -4,7 +4,7 @@ const { Schema, model} = require('mongoose');
 import { isEmail } from 'validator';
 
 // Schema to create User model
-const userModel = new Schema(
+const userSchema = new Schema(
     {
        username: {
         type: String,
@@ -42,12 +42,12 @@ const userModel = new Schema(
 
     // Create a virtual called friendCouont that retrieves the lengh of the user's friends array field on query
 
-    userModel
+    userSchema
       .virtual('friendCount')
       .get(function () {
         return this.friends.length
       });
     
-    const User = model('User', userModel)
+    const User = model('User', userSchema)
     
     module.exports = User;
