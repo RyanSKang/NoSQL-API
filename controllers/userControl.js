@@ -1,5 +1,4 @@
 // Importing User and Thought models
-const { userInfo } = require('os');
 const { User, Thought } = require('../models');
 
 // module.export all functions so they can be used in api routes
@@ -7,24 +6,29 @@ module.exports = {
     // Getting all Users
     getAllUsers(req, res) {
         User.find()
-            .then((users) => res.json(users))
+            .then((user) => res.json(user))
             .catch((err) => res.status(500).json(err))
     },
     // Get a single User
     getSingleUser(req, res) {
         User.findOne({_id: req.params.userId})
         .select('-__v')
-        .then ((singleUser) =>
-            !singleUser
+        .populate('friends')
+        .populate('thoughts')
+        .then ((user) =>
+            !user
                 ? res.status(404).json({ message: 'No User with that id'})
-                : res.json(singleUser)
+                : res.json(user)
         )
         .catch((err) => res.status(500).json(err));
     },
     // Creating a User
     createUser(req, res) {
-        User.create(req.body)
-            .then((user) => res.json(user))
+        User.create({
+            username: req.body.username,
+            email: req.body.email
+        })
+            .then((data) => res.json(data))
             .catch((err) => res.status(500).json(err));
     },
     // Deleting a User
@@ -46,7 +50,9 @@ module.exports = {
     updateUser( req, res) {
         User.findOneAndUpdate(
             { _id: req.params.userId},
-            { email: req.body.email},
+            {   username: req.body.username,
+                email: req.body.email
+            },
             { new: true}
         )
         .then((user) => 
@@ -63,7 +69,7 @@ module.exports = {
         .then((user) => {
             return User.findOneAndUpdate(
                 {_id: req.params.userId},
-                {$set: {friends: user._id}},
+                {$addToset: {friends: user._id}},
                 {new: true}
             );
         }).then((user) => 

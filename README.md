@@ -52,7 +52,14 @@ Following Installation Needed:
   
 
 ## Screenshots
-### Figure 1. 
+### Figure 1. Get All User
+<img width="1462" alt="Screenshot 2023-08-04 at 10 13 52 PM" src="https://github.com/RyanSKang/OORM-Ecommerce-BackEnd/assets/124969918/7fa6e505-3fa7-4aab-822b-b5515772e682">  
+
+### Figure 2. Get All Thoughts
+
+### Figure 3. Create a Reaction
+
+### Figure 4. Add a Friend
 
 
 ## Walkthrough Video
