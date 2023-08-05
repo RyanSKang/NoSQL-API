@@ -10,18 +10,18 @@ const reactionSchema = new Schema(
             default: () => new Types.ObjectId()
         },
         reactionBody: {
-            type: String, 
-            required: true, 
+            type: String,
+            required: true,
             minlength: 1,
             maxlength: 280
         },
         username: {
-            type: String, 
+            type: String,
             required: true
         },
         createdAt: {
-            type: Date, 
-            default: Date.now, 
+            type: Date,
+            default: Date.now,
             get: (time) => allotedTime(time)
         }
     },
@@ -29,8 +29,8 @@ const reactionSchema = new Schema(
     {
         toJSON: {
             getters: true,
-          },
-          id: false,
+        },
+        id: false,
     }
 );
 
