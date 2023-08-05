@@ -12,6 +12,7 @@ module.exports = {
     getSingleThought(req, res) {
         Thought.findOne({_id: req.params.thoughtId})
         .select('-__v')
+        .populate('reactions')
         .then ((singleThought) =>
             !singleThought
                 ? res.status(404).json({ message: 'No User with that id'})
@@ -21,11 +22,14 @@ module.exports = {
     },
     // Creating a Thought and then updating into user's userSchema
     createThought(req, res) {
-        Thought.create(req.body)
+        Thought.create({
+            thoughtText: req.body.thoughtText,
+            username: req.body.username
+        })
         .then((thought) => {
             return User.findOneAndUpdate(
-                { username: req.params.username},
-                { $set: {thoughts: thought._id}},
+                { username: req.body.username},
+                { $addToset: {thoughts: thought._id}},
                 { new: true}
             );
         }).then((user) => 
@@ -60,7 +64,7 @@ module.exports = {
             !thought
             ? res.status(404).json({ message: 'No thought with that Id'})
             : User.findOneAndUpdate(
-                { thoughts: req/params.thoughtId},
+                {thoughts: req.params.thoughtId},
                 {$pull: {thoughts: req.params.thoughtId}},
                 {new: true}
                 )
@@ -76,8 +80,9 @@ module.exports = {
     createReaction (req,res) {
         Thought.findOneAndUpdate(
             {_id:req.params.thoughtId},
-            {$set: {reactions: req.body}},
-            {new: true}
+            {$addToset: {reactions: req.body}},
+            {new: true},
+            {runValidators:true}
         )
         .then((thought) => 
             !thought
@@ -91,7 +96,8 @@ module.exports = {
         Thought.findOneAndUpdate(
             {_id:req.params.thoughtId},
             {$pull: {reactions: {reactionsId: req.params.reactionId}}},
-            {new: true}
+            {new: true},
+            {runValidators:true}
         )
         .then((thought) => 
             !thought
