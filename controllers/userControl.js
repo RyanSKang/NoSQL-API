@@ -69,7 +69,7 @@ module.exports = {
         .then((user) => {
             return User.findOneAndUpdate(
                 {_id: req.params.userId},
-                {$addToset: {friends: user._id}},
+                {$addToSet: {friends: user._id}},
                 {new: true}
             );
         }).then((user) => 

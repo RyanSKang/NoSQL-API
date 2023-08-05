@@ -29,7 +29,7 @@ module.exports = {
         .then((thought) => {
             return User.findOneAndUpdate(
                 { username: req.body.username},
-                { $addToset: {thoughts: thought._id}},
+                { $addToSet: {thoughts: thought._id}},
                 { new: true}
             );
         }).then((user) => 
@@ -41,21 +41,36 @@ module.exports = {
     },
     // Updating a Thought and updating user's thoughtSchema
     updateThought(req, res) {
+        // Thought.findOneAndUpdate(
+        //     { _id: req.params.thoughtId},
+        //     { thoughtText: req.body.thoughtText,
+        //       username: req.body.username},
+        //     { new: true},
+        //     (err, result) => {
+        //         if(err) {
+        //             console.log(err);
+        //             res.status(500).json(err);
+        //         } else {
+        //             res.status(200).json(result);
+        //             console.log(`${result} has been updated successfully`)
+        //         }
+        //     }
+        // );
         Thought.findOneAndUpdate(
-            { _id: req.params.thoughtId},
-            { thoughtText: req.body.thoughtText,
-              username: req.body.username},
-            { new: true},
-            (err, result) => {
-                if(err) {
-                    console.log(err);
-                    res.status(500).json(err);
-                } else {
-                    res.status(200).json(result);
-                    console.log(`${result} has been updated successfully`)
-                }
+            {_id: req.params.thoughtId},
+            {   thoughtText: req.body.thoughtText,
+                username: req.body.username
+            },
+            { new: true, runValidators: true}
+        )
+        .then((thoughtData) => {
+            if(!thoughtData){
+                res.status(404).json({ message: 'No thought with that Id'})
+                return;
             }
-        );
+            res.json(thoughtData);
+        })
+        .catch((err) => res.json(err));
     },
     // Deleting a Thought and update user's thoughtSchema
     deleteThought (req, res) {
