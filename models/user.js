@@ -1,8 +1,4 @@
 const { Schema, model} = require('mongoose');
-
-// Importing validator to validate email
-import { isEmail } from 'validator';
-
 // Schema to create User model
 const userSchema = new Schema(
     {
@@ -13,11 +9,10 @@ const userSchema = new Schema(
         trim: true
        },
        email: {
-        type: String, 
+        type: String,
         required: true, 
         unique: true,
-        // Mongoose's matching validation
-        validate: [ isEmail, 'invalid email']
+        match: [/.+@.+\..+/]
        },
        thoughts: [
         {
