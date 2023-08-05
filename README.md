@@ -67,7 +67,7 @@ Following Installation Needed:
 
 ## Walkthrough Video
 
-<a href=""> Walkthrough Video Link </a>
+<a href="https://watch.screencastify.com/v/XZeZGGOWW8oloJLLxXZI"> Walkthrough Video Link </a>
 
 ## Credits
 -DU-Virt-FSF-PT-02-2023-U-LOLC | NoSQL 28-Stu_Mini-Project  
