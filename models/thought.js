@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose');
+const { Schema, model, Types } = require('mongoose');
 
 // Importing momentFormatDate.js for time sheet of when thought is created
 const allotedTime = require('../utils/momentFormatDate');
@@ -39,9 +39,7 @@ const thoughtSchema = new Schema(
 
 // Create a virtual called reactionCount that retrieves the length of the thought's reactions array field on query.
 
-thoughtSchema
-    .virtual('reactionCount')
-    .get(function() {
+thoughtSchema.virtual('reactionCount').get(function() {
         return this.reactions.length;
     });
 

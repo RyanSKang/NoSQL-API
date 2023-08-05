@@ -28,7 +28,6 @@ const reactionSchema = new Schema(
     // Data for each of these routes is displayed in a formatted JSON
     {
         toJSON: {
-            virtuals: true,
             getters: true,
           },
           id: false,
